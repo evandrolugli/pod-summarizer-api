@@ -8,8 +8,30 @@ POST http://localhost:3333/videos
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="steve-jobs.mp3"
+Content-Disposition: form-data; name="image"; filename="shoes.mp3"
 Content-Type: audio/mpeg
 
-< ./steve-jobs.mp3
+< ./shoes.mp3
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+# @name create-transcription
+POST http://localhost:3333/videos/8afd7e57-00a6-4d95-a70b-599d7de67cb8/transcription
+Content-Type: application/json
+
+{
+    "prompt" : "inspiration, shoes"
+}
+
+###
+
+# @name generate-ai-completion
+POST http://localhost:3333/ai/complete
+Content-Type: application/json
+
+{
+    "videoId": "8afd7e57-00a6-4d95-a70b-599d7de67cb8",
+    "temperature": 0.5,
+    "template": "Generate a summary from '''{transcription}'''"
+}
